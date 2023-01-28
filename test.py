@@ -1,39 +1,53 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import time
 
-# Open browser and navigate to URL
-driver = webdriver.Chrome()
-driver.get("https://finance.yahoo.com/quote/AEGA.OL?p=&.tsrc=fin-srch")
+tickers = ["AEGA", "AGLX", "AIRX", "AKAST", "AKBM", "ACH", "AKH", "AOW", "AKOBO", "ARCH", "ABS", "ARGEO", "ASTRO", "AURA", "ACR", "BGBIO", "BFISH", "CAPSL", "EAM", "ECIT", "ECO", "EWIND", "EIOF", "EMGS", "EFUEL", "EXTX", "FKRFT", "GEOS", "HAVI", "HYARD", "HDLY", "HUNT", "HYPRO", "KAHOT", "KOMPL", "KOA", "KYOTO", "LYTIX", "MVW", "MSEIS", "MRCEL", "MNTR", "NOC", "NEXT", "NORDH", "NANOV", "NUMND", "NODL", "NOL", "NAS", "NOR", "NYKD", "OBSRV", "PEXIP", "PGS", "QFUEL", "SCANA", "SKAND", "TEKNA", "VGM"]
 
-driver.implicitly_wait(2)
-#maximize browser
-driver.maximize_window()
-# Locate the object that contains the number value
-# object = driver.find_element_by_xpath("/\//*[@id="quote-header-info"]/div[3]/div[1]/div/fin-streamer[1]")
-
-cookies = driver.find_element(By.XPATH, '/html/body/div/div/div/div/form/div[2]/div[2]/button')
-print("Found cookies")
-cookies.click()
-print("Clicked cookies")
-driver.implicitly_wait(2)
-
-do_not_save = driver.find_element(By.XPATH, '//*[@id="myLightboxContainer"]/section/button[2]')
-print("Found no")
-do_not_save.click()
-print("Clicked no")
-driver.implicitly_wait(2)
-
-
-object = driver.find_element(By.XPATH, '//*[@id="quote-header-info"]/div[3]/div[1]/div/fin-streamer[1]')
-number_value = object.text
+sentence = "https://finance.yahoo.com/quote/" 
+end = ".OL?p=&.tsrc=fin-srch"
+n = 0
 
 
 
 
-# Write the number value to a text file
-with open("numberValue.txt", "w") as file:
-    file.write(number_value)
 
-# Close the browser
+for word in tickers:
+    
+    with webdriver.Chrome() as driver: 
+        print(f"\n\nHenter {tickers[n]}\n\n")
+
+        driver.get(sentence + tickers[n] + end)
+        driver.maximize_window()
+        driver.implicitly_wait(3)
+
+        cookies = driver.find_element(By.XPATH, '/html/body/div/div/div/div/form/div[2]/div[2]/button')
+        cookies.click()
+    
+        driver.implicitly_wait(3)
+        
+        do_not_save = driver.find_element(By.XPATH, '//*[@id="myLightboxContainer"]/section/button[2]')
+        do_not_save.click()
+
+        driver.implicitly_wait(3)
+
+
+        object = driver.find_element(By.XPATH, '//*[@id="quote-header-info"]/div[3]/div[1]/div/fin-streamer[1]')
+        number_value = object.text
+
+        driver.implicitly_wait(3)
+        
+
+        with open("numberValue.txt", "a") as f:
+            
+            f.write(tickers[n])
+            f.write(" ")
+            f.write(number_value)
+            f.write("\n")
+            f.close
+        
+        print(f"\n\nAdded {tickers[n]} to the list")
+        n = n + 1
+
 driver.quit()
+driver.implicitly_wait(3)
+    
