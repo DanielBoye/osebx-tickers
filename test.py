@@ -1,11 +1,13 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-tickers = ["AEGA", "AGLX", "AIRX", "AKAST", "AKBM", "AKH", "AKOBO", "ARCH", "ABS", "ARGEO", "ASTRO", "AURA", "ACR", "BGBIO", "BFISH", "CAPSL", "EAM", "ECIT", "ECO", "EWIND", "EIOF", "EMGS", "EFUEL", "EXTX", "FKRFT", "GEOS", "HAVI", "HYARD", "HDLY", "HUNT", "HYPRO", "KAHOT", "KOMPL", "KOA", "KYOTO", "LYTIX", "MVW", "MSEIS", "MRCEL", "MNTR", "NOC", "NEXT", "NORDH", "NANOV", "NUMND", "NODL", "NOL", "NAS", "NOR", "NYKD", "OBSRV", "PEXIP", "PGS", "QFUEL", "SCANA", "SKAND", "TEKNA", "VGM"]
+tickers = ["AEGA", "AGLX", "AIRX", "AKAST"]
 
 sentence = "https://finance.yahoo.com/quote/" 
 end = ".OL?p=&.tsrc=fin-srch"
 n = 0
+ticker_count = 0
+price_count = 1
 
 
 values = []
@@ -39,11 +41,12 @@ for word in tickers:
         values.append((tickers[n], number_value))
         print(f"\n\nAdded {tickers[n]} to the list")
         print(values)
-            
-
         n = n + 1
 
-print("Finished values: ", values)
-driver.quit()
-driver.implicitly_wait(3)
+for value in values:
+    ticker = value[0]
+    price = float(value[1])
     
+    print(f"{ticker} = {round(price), 1}kr")
+
+
