@@ -8,7 +8,7 @@ end = ".OL?p=&.tsrc=fin-srch"
 n = 0
 
 
-
+values = []
 
 
 for word in tickers:
@@ -17,7 +17,6 @@ for word in tickers:
         print(f"\n\nHenter {tickers[n]}\n\n")
 
         driver.get(sentence + tickers[n] + end)
-        driver.maximize_window()
         driver.implicitly_wait(3)
 
         cookies = driver.find_element(By.XPATH, '/html/body/div/div/div/div/form/div[2]/div[2]/button')
@@ -36,18 +35,15 @@ for word in tickers:
 
         driver.implicitly_wait(3)
         
-
-        with open("numberValue.txt", "a") as f:
-            
-            f.write(tickers[n])
-            f.write(" ")
-            f.write(number_value)
-            f.write("\n")
-            f.close
-        
+        number_value = object.text
+        values.append((tickers[n], number_value))
         print(f"\n\nAdded {tickers[n]} to the list")
+        print(values)
+            
+
         n = n + 1
 
+print("Finished values: ", values)
 driver.quit()
 driver.implicitly_wait(3)
     
