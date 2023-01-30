@@ -16,7 +16,7 @@ values = []
 for word in tickers:
     
     with webdriver.Chrome() as driver: 
-        print(f"\n\Getting {tickers[n]}\n\n")
+        print(f"\nGetting {tickers[n]}\n\n")
 
         driver.get(sentence + tickers[n] + end)
         driver.implicitly_wait(3)
