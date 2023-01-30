@@ -12,3 +12,4 @@ for value in values:
         print(f"{ticker} = {int(price)} kr")
     else:
         print(f"{ticker} = {price} kr")
+

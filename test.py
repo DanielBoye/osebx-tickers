@@ -16,7 +16,7 @@ values = []
 for word in tickers:
     
     with webdriver.Chrome() as driver: 
-        print(f"\n\nHenter {tickers[n]}\n\n")
+        print(f"\n\Getting {tickers[n]}\n\n")
 
         driver.get(sentence + tickers[n] + end)
         driver.implicitly_wait(3)
@@ -43,10 +43,14 @@ for word in tickers:
         print(values)
         n = n + 1
 
+print("\n")
+
 for value in values:
     ticker = value[0]
     price = float(value[1])
-    
-    print(f"{ticker} = {round(price), 1}kr")
+    if price.is_integer():
+        print(f"{ticker} = {int(price)} kr")
+    else:
+        print(f"{ticker} = {price} kr")
 
 
