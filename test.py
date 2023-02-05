@@ -43,6 +43,10 @@ for word in tickers:
         print(f"\n\nAdded {tickers[n]} to the list")
         print(values)
         n = n + 1
+        
+        with open('file.txt', 'a') as f:
+            f.write(number_value)
+            f.write("\n")
 
 print("\n")
 
