@@ -45,8 +45,7 @@ for word in tickers:
         n = n + 1
         
         with open('file.txt', 'a') as f:
-            f.write(number_value)
-            f.write("\n")
+            f.write(f"('{tickers[n]}', {number_value}), ")
 
 print("\n")
 
